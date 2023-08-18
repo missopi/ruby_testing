@@ -98,7 +98,7 @@ describe NumberGame do
 
   describe '#verify_input' do
     subject(:game_check) { described_class.new }
-    # Note: #verify_input will only return a value if it matches /^[0-9]$/
+    # NOTE: #verify_input will only return a value if it matches /^[0-9]$/
 
     context 'when given a valid input as argument' do
       it 'returns valid input' do
@@ -112,7 +112,10 @@ describe NumberGame do
 
     # Write a test for the following context.
     context 'when given invalid input as argument' do
-      xit 'returns nil' do
+      it 'returns nil' do
+        user_input = '89'
+        verified_input = game_check.verify_input(user_input)
+        expect(verified_input).to eq(nil)
       end
     end
   end
