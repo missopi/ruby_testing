@@ -124,23 +124,39 @@ describe BinaryGame do
     # Write a test for the following two context blocks. You will need to
     # provide 1-2 invalid inputs (letters, symbols, or numbers that are not
     # between the min & max integers) and one valid input number (as a string).
-
     # Remember that a stub can be called multiple times and return different values.
     # https://rspec.info/features/3-12/rspec-mocks/configuring-responses/returning-a-value/
 
     context 'when user inputs an incorrect value once, then a valid input' do
       before do
+        letter = 'j'
+        valid_input = '4'
+        allow(game_input).to receive(:gets).and_return(letter, valid_input)
       end
 
-      xit 'completes loop and displays error message once' do
+      it 'completes loop and displays error message once' do
+        min = game_input.instance_variable_get(:@minimum)
+        max = game_input.instance_variable_get(:@maximum)
+        error_message = "Input error! Please enter a number between #{min} or #{max}."
+        expect(game_input).to receive(:puts).with(error_message).once
+        game_input.player_input(min, max)
       end
     end
 
     context 'when user inputs two incorrect values, then a valid input' do
       before do
+        letter = 'p'
+        symbol = '$'
+        valid_input = '6'
+        allow(game_input).to receive(:gets).and_return(letter, symbol, valid_input)
       end
 
-      xit 'completes loop and displays error message twice' do
+      it 'completes loop and displays error message twice' do
+        min = game_input.instance_variable_get(:@minimum)
+        max = game_input.instance_variable_get(:@maximum)
+        error_message = "Input error! Please enter a number between #{min} or #{max}."
+        expect(game_input).to receive(:puts).with(error_message).twice
+        game_input.player_input(min, max)
       end
     end
   end
