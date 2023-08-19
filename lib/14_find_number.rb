@@ -17,6 +17,10 @@ class FindNumber
   end
 
   def game_over?
-    @guess == @answer
+    guess == answer
+  end
+
+  def update_range
+    guess < answer ? @min = guess + 1 : @max = guess - 1
   end
 end
