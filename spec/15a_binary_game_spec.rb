@@ -168,16 +168,26 @@ describe BinaryGame do
   describe '#verify_input' do
     # Located inside #player_input (Looping Script Method)
     # Query Method -> Test the return value
-
-    # Note: #verify_input will only return a number if it is between?(min, max)
+    subject(:verify_game_input) { described_class.new(1, 50) }
+    # NOTE: #verify_input will only return a number if it is between?(min, max)
 
     context 'when given a valid input as argument' do
-      xit 'returns valid input' do
+      it 'returns valid input' do
+        min = verify_game_input.instance_variable_get(:@minimum)
+        max = verify_game_input.instance_variable_get(:@maximum)
+        input = 45
+        verified_input = verify_game_input.verify_input(min, max, input)
+        expect(verified_input).to eq(45)
       end
     end
 
     context 'when given invalid input as argument' do
-      xit 'returns nil' do
+      it 'returns nil' do
+        min = verify_game_input.instance_variable_get(:@minimum)
+        max = verify_game_input.instance_variable_get(:@maximum)
+        input = 67
+        verified_input = verify_game_input.verify_input(min, max, input)
+        expect(verified_input).to eq(nil)
       end
     end
   end
@@ -269,7 +279,11 @@ describe BinaryGame do
 
     # Write a test for the following context.
     context 'when game minimum and maximum is 100 and 600' do
-      xit 'returns 9' do
+      subject(:game_six_hundred) { described_class.new(100, 600) }
+
+      it 'returns 9' do
+        max = game_six_hundred.maximum_guesses
+        expect(max).to eq(9)
       end
     end
   end
@@ -327,7 +341,13 @@ describe BinaryGame do
 
     # Write a test for the following context.
     context 'when game_over? is false five times' do
-      xit 'calls display_turn_order five times' do
+      before do
+        allow(search_display).to receive(:game_over?).and_return(false, false, false, false, false, true)
+      end
+
+      it 'calls display_turn_order five times' do
+        expect(game_display).to receive(:display_turn_order).with(search_display).exactly(5).times
+        game_display.display_binary_search(search_display)
       end
     end
   end
