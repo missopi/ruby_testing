@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop: disable Layout/LineLength
-
 # require_relative '../lib/15c_random_number'
 # require_relative '../lib/15b_binary_search'
 
@@ -99,4 +97,3 @@ class BinaryGame
     end
   end
 end
-# rubocop: enable Layout/LineLength
